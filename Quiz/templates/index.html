@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% block title %} Quiz {% endblock %}
+{% block css %}
+<style>
+ h1 {
+  text-align: center;
+  }
+
+  .quiz_select h1 {
+    margin-bottom: 5px;
+    text-transform: uppercase;
+  }
+
+  .quiz_select {
+    margin-top: 2em;
+    margin-bottom: -2em;
+  }
+
+  .attempt {
+    --gradient: linear-gradient(to left top, cornflowerblue 0%, purple 90%) !important;
+  }
+
+  body {
+    background: white;
+    background-image: url('../static/images/bg4.jpg');
+    min-height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .card {
+    border: 4px solid purple;
+    box-shadow: 1rem 0.7rem rgba(0,0,0,0.3);
+  }
+
+  #btn {
+    border: 5px solid;
+    border-image-slice: 7 12 14 5;
+    background: var(--gradient) !important;
+    -webkit-text-fill-color: #fff !important;
+    border-image-source: var(--gradient) !important;
+    text-decoration: none;
+    position: relative;
+  }
+
+  #btn:hover,
+  #btn:focus {
+    background: var(--gradient) !important;
+    -webkit-text-fill-color: #fff !important;
+    border: 3px solid #fff !important;
+    box-shadow: #222 1px 0 10px;
+  }
+
+</style>
+
+{% endblock %}
+{% load static %}
+
+{% block body %}
+<div class = "quiz_select" id="quiz_select">
+  <h1>Aptitude Test Preparation</h1>
+  <figure class="text-center">
+    <blockquote class="blockquote">
+      <p class="mb-0">Get free Online Quantitative Aptitude Test questions and answers for the examinations. Aptitude Tests are conducted to assess the logical thinking, decision making and problem solving skills of a person. </p>
+
+    </blockquote>
+    <figcaption class="blockquote-footer">
+      Evaluate your Aptitude skills by trying the free Aptitude Test online at  <cite title="Source Title">Aptiworld</cite>
+    </figcaption>
+  </figure>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-title"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        {% if user.is_authenticated %}
+        <div class="modal-body" id="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" id="start-quiz" class="btn btn-primary">Start Quiz</button>
+        </div>
+        {% else %}
+        <div class="modal-body">
+          <h3>Login first to start the quiz</h3>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <br><br><br>
+
+  <!-- cards -->
+  <div class="container">
+    <div class="container mx-auto mt-2">
+      <div class="row">
+
+        {% for i in quiz %}
+        <div class="col-md-3">
+          <div class="card mb-5" style="width: 21rem; height: 21rem">
+            <div class="card-body" style="text-align: center;">
+              <h5 class="card-head mb-2">{{i.name}}</h5>
+              <p>{{i.desc}}</p>
+              <button data-bs-target="#exampleModal" data-bs-toggle="modal" data-time="{{i.time}}"
+                data-questions="{{i.number_of_questions}}" data-name="{{i.name}}" data-id="{{i.id}}" id="btn"
+                class="attempt btn pb-1 modal-button mt-2">Attempt Quiz
+              </button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}
+  {% block js %}
+  <script>
+    const modalBtns = [...document.getElementsByClassName('modal-button')]
+    const modalBody = document.getElementById('modal-body')
+    const modaltitle = document.getElementById('modal-title')
+    const startQuiz = document.getElementById('start-quiz')
+
+    const url = window.location.href
+
+    modalBtns.forEach(modalBtn => modalBtn.addEventListener('click', () => {
+      const id = modalBtn.getAttribute('data-id')
+      const name = modalBtn.getAttribute('data-name')
+      const numberOfQuestions = modalBtn.getAttribute('data-questions')
+      const time = modalBtn.getAttribute('data-time')
+
+      modaltitle.innerHTML = `${name}`
+
+      modalBody.innerHTML = `
+      The ${name} consists of ${numberOfQuestions} questions and hence it is of ${numberOfQuestions} marks. You will be getting exactly ${time} seconds to complete ${numberOfQuestions} multiple choice questions. After completing the questions you can click on the
+            submit button to get your score and to understand the concept in which you made a mistake.<br>
+            All the best for the quiz!!!
+      `
+
+      startQuiz.addEventListener('click', () => {
+        window.location.href = url + id
+      });
+    }));
+  </script>
+
+{% endblock %}

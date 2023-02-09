@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %} Login Page {% endblock %}
+{% block css %}
+
+  {% endblock %}
+
+  {% block body %}
+  
+  <div class="fixfooter">
+  <center> 
+  <div class="row py-5 p-4 bg-white d-flex justify-content-center align-items-center">
+
+    <div class="col-lg-6">
+        <div class="bg-dark rounded-pill px-4 py-3 text-uppercase font-weight-bold"
+            style="color:rgb(248, 248, 248);font-weight:bold">Login Details</div>
+        <br>
+        {% for message in messages %}
+        <div class="alert alert-danger">
+        <a class="close" href="#" data-dismiss="alert">×</a>
+           {{ message }}
+        </div>
+      {% endfor %}
+        <form class="row g-4" method="POST" action="/login/">{% csrf_token %}
+            <div class="col-md-12">
+                <label for="inputname" class="form-label" style="font-weight: bold;"><i>
+                        Username</i></label>
+                <input type="text" placeholder="Enter Username" style="text-align: center;"
+                    class="form-control" id="username" name="username" required>
+            </div>
+
+            <div class="col-md-12">
+                <label for="inputname" class="form-label" style="font-weight: bold;"><i>
+                        Password</i></label>
+                <input type="password" placeholder="Enter Password" style="text-align: center;"
+                    class="form-control" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-outline-primary">Submit</button>
+          </center>
+        </div>
+  <!-- Styling Footer -->
+<style>
+.fixfooter {
+  padding-bottom: 110px;
+  width: 99%;
+}
+</style>
+  
+
+  {% endblock %}

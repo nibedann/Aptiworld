@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %} Results {% endblock %}
+
+
+{% block body %}
+<style>
+  .resultformat {
+  margin: 20px;}
+</style>
+
+<div class="container mt-4">
+  <div class="btn-group gap-3">
+    {% if request.path == "/results-Logical-Reasoning/" %}
+    <a href="/results/" class="btn btn-primary rounded"><div class="resultformat">Your results</div></a>
+    <a href="/results-all/" class="btn btn-primary rounded"><div class="resultformat">All student results</div></a>
+    <a href="/results-Logical-Reasoning/" class="btn btn-primary rounded active"><img src="../static/images/winners.png" alt=""/> Logical Reasoning</a>
+    <a href="/results-Current-Affairs/" class="btn btn-primary rounded"><img src="../static/images/winners.png" alt=""/> Current Affairs</a>
+    <a href="/results-Engineering/" class="btn btn-primary rounded"><img src="../static/images/winners.png" alt=""/> Engineering</a>
+    <a href="/results-General-Knowledge/" class="btn btn-primary rounded"><img src="../static/images/winners.png" alt=""/> General Knowledge</a>
+    {% endif %}
+  </div>
+  <div class="btn-group gap-3">
+    {% if request.path == "/results-Current-Affairs/" %}
+    <a href="/results/" class="btn btn-primary rounded"><div class="resultformat">Your results</div></a>
+    <a href="/results-all/" class="btn btn-primary rounded"><div class="resultformat">All student results</div></a>
+    <a href="/results-Logical-Reasoning/" class="btn btn-primary rounded"><img src="../static/images/winners.png" alt=""/> Logical Reasoning</a>
+    <a href="/results-Current-Affairs/" class="btn btn-primary rounded active"><img src="../static/images/winners.png" alt=""/> Current Affairs</a>
+    <a href="/results-Engineering/" class="btn btn-primary rounded"><img src="../static/images/winners.png" alt=""/> Engineering</a>
+    <a href="/results-General-Knowledge/" class="btn btn-primary rounded"><img src="../static/images/winners.png" alt=""/> General Knowledge</a>
+    {% endif %}
+  </div>
+  <div class="btn-group gap-3">
+    {% if request.path == "/results-Engineering/" %}
+    <a href="/results/" class="btn btn-primary rounded"><div class="resultformat">Your results</div></a>
+    <a href="/results-all/" class="btn btn-primary rounded" aria-current="page"><div class="resultformat">All student results</div></a>
+    <a href="/results-Logical-Reasoning/" class="btn btn-primary rounded"><img src="../static/images/winners.png" alt=""/> Logical Reasoning</a>
+    <a href="/results-Current-Affairs/" class="btn btn-primary rounded"><img src="../static/images/winners.png" alt=""/> Current Affairs</a>
+    <a href="/results-Engineering/" class="btn btn-primary rounded active"><img src="../static/images/winners.png" alt=""/> Engineering</a>
+    <a href="/results-General-Knowledge/" class="btn btn-primary rounded"><img src="../static/images/winners.png" alt=""/> General Knowledge</a>
+    {% endif %}
+  </div>
+  <div class="btn-group gap-3">
+    {% if request.path == "/results-General-Knowledge/" %}
+    <a href="/results/" class="btn btn-primary rounded"><div class="resultformat">Your results</div></a>
+    <a href="/results-all/" class="btn btn-primary rounded" aria-current="page"><div class="resultformat">All student results</div></a>
+    <a href="/results-Logical-Reasoning/" class="btn btn-primary rounded"><img src="../static/images/winners.png" alt=""/> Logical Reasoning</a>
+    <a href="/results-Current-Affairs/" class="btn btn-primary rounded"><img src="../static/images/winners.png" alt=""/> Current Affairs</a>
+    <a href="/results-Engineering/" class="btn btn-primary rounded "><img src="../static/images/winners.png" alt=""/> Engineering</a>
+    <a href="/results-General-Knowledge/" class="btn btn-primary active"><img src="../static/images/winners.png" alt=""/> General Knowledge</a>
+    {% endif %}
+    </div>
+      <br>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Quiz</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+{% for mark in marks %}
+<tr>
+  <td>{{mark.user}}</td>
+  <td>{{mark.quiz}}</td>
+  <td>{{mark.score}}</td>
+</tr>
+{% endfor %}
+</table>
+</div>
+{% endblock %}

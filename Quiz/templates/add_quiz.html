@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %} Add Quiz {% endblock %}
+
+{% block body %}
+
+<div class="container mt-4">
+    <h1>Add Quiz Topic</h1> <br>
+    <form action="/add_quiz/" method="POST"> {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary mb-4">Submit</button>
+    <div class="mt4" style="height:75px;"></div>
+    </form>
+</div>
+{% endblock %}
