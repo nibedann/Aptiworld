@@ -1,7 +1,6 @@
 # Aptiworld
 "Unlock your full potential with Aptiworld, where aptitude meets knowledge."
 
-Django-Quiz-Application
 Link: http://aptiworld.pythonanywhere.com
 
 For demo, please use the following to login: 
