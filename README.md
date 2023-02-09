@@ -6,8 +6,8 @@ Link: http://aptiworld.pythonanywhere.com
 
 For demo, please use the following to login: 
 ```
-👾 Student Account --> User: student01 | PW: 1234
-👾 Teacher Account --> User: Teacher | PW: 1234
+Student Account --> User: student01 | PW: 1234
+Teacher Account --> User: Teacher | PW: 1234
 ```
 ------------------------------------------------------
 
